@@ -66,8 +66,7 @@ module.exports = function(grunt) {
 				if (supportedTypes[type] == "html") {
 					content = html.call(self, content, filepath, relativeTo);
 				} else if (supportedTypes[type] === "css") {
-					//css content is relative to the css path
-					content = css.call(self, content, filepath, relativeTo + path.dirname(filepath).replace(options.base,'') + '/');
+					content = css.call(self, content, filepath, relativeTo);
 				}
 
 				// write the contents to destination
@@ -133,7 +132,7 @@ module.exports = function(grunt) {
 
         // if flatten is true then we will convert all paths to absolute here!
         if (options.flatten) {
-            resourceUrl.pathname = '/' + resourceUrl.pathname.replace(/^(\.\.?\/)+/, '');
+            resourceUrl.pathname = path.dirname(filename).replace(options.base,'') + '/' + resourceUrl.pathname.replace(/^(\.\.?\/)+/, '');
         }
 
         if (options.match) {
