@@ -66,7 +66,8 @@ module.exports = function(grunt) {
 				if (supportedTypes[type] == "html") {
 					content = html.call(self, content, filepath, relativeTo);
 				} else if (supportedTypes[type] === "css") {
-					content = css.call(self, content, filepath, relativeTo);
+					//css content is relative to the css path
+					content = css.call(self, content, filepath, relativeTo + path.dirname(filepath).replace(options.base,'') + '/');
 				}
 
 				// write the contents to destination
