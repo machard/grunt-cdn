@@ -22,7 +22,7 @@ module.exports = function(grunt) {
 	var reghtmls = [
 		new RegExp(/<(?:img|source|script).*\b(?:src)=['"](?!.*\/\/)([^'"\{]+)['"].*\/?>/ig),
 		new RegExp(/<(?:link).*\b(?:href)=['"](?!.*\/\/)([^'"\{]+)['"].*\/?>/ig),
-		new RegExp(/<script(?! skip-cdn).*\bdata-main=['"](?!.*\/\/)([^'"\{]+)['"].*\/?>/ig)
+		new RegExp(/<script.*\bdata-main=['"](?!.*\/\/)([^'"\{]+)['"].*\/?>/ig)
 	];
 
 	var regcss = new RegExp(/url\(([^)]+)\)/ig);
