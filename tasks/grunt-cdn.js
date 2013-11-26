@@ -66,6 +66,7 @@ module.exports = function(grunt) {
 				if (supportedTypes[type] == "html") {
 					content = html.call(self, content, filepath, relativeTo);
 				} else if (supportedTypes[type] === "css") {
+					//css content is relative to the css path
 					content = css.call(self, content, filepath, relativeTo);
 				}
 
@@ -78,12 +79,12 @@ module.exports = function(grunt) {
 	function html(content, filename, relativeTo) {
         var self = this;
 		return reghtmls.reduce(function (value, reghtml) {
-                  while(reghtml.exec(value)!==null) {
+                  //while(reghtml.exec(value)!==null) {
 			value = value.replace(reghtml, function(match, resource) {
 				return match.replace(resource, cdnUrl.call(self, resource, filename, relativeTo));
 			});
 
-                  }
+                 // }
                   return value;
 		}, content);
 	}
@@ -121,6 +122,7 @@ module.exports = function(grunt) {
 		}
 
 		if(ignorePath && resource.match(ignorePath)) {
+			console.log(resource)
 			return resource;
 		}
 
@@ -131,7 +133,7 @@ module.exports = function(grunt) {
     }
 
         // if flatten is true then we will convert all paths to absolute here!
-        if (options.flatten) {
+        if (options.flatten && resource.substring(0,1)!="/") {
             resourceUrl.pathname = path.dirname(filename).replace(options.base,'') + '/' + resourceUrl.pathname.replace(/^(\.\.?\/)+/, '');
         }
 
